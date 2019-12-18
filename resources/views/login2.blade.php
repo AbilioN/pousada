@@ -19,5 +19,8 @@
     <label class="form-check-label" for="exampleCheck1">Clique em mim</label>
   </div>
   <button type="submit" class="btn btn-primary">Enviar</button>
+  <a href="/registrar" class="btn btn-primary">Registrar</a>
 </form>
+
+
 @endsection

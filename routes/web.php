@@ -58,6 +58,9 @@ Route::get('/login2' , function(){
 Route::get('/contato' , function(){
     return view('contato');
 });
+Route::get('/registrar' , function(){
+    return view('registrar');
+});
 
 
 Route::post('/contato', 'ContatoControlador@store');
