@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <title>Mountain Travel</title>
     <style>
-    .topo{
-      height: 100px;
-      background-color: yellow;
-      margin-bottom: 8px;
-
-    }
-
     </style>
 </head>
 <body>
