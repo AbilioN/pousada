@@ -32,7 +32,7 @@ Route::get('/fotos/eventos', function(){
 });
 
 
-//rotas para servicos
+//Rotas para servicos
 
 Route::get('/servicos/culinaria' , function(){
     return view('culinaria');
@@ -48,30 +48,41 @@ Route::get('/servicos/guia' , function(){
 });
 
 
-//Routa para login e contato
+//Rotas para logins
 
 Route::get('/login2' , function(){
     return view('login2');
 });
 
-
-Route::get('/contato' , function(){
-    return view('contato');
-});
 Route::get('/registrar' , function(){
     return view('registrar');
 });
 
 
+Route::get('/login' ,'UserControlador@index' );
+
+
+// Rotas para contato
+
+Route::get('/contato' , function(){
+    return view('contato');
+});
+
 Route::post('/contato', 'ContatoControlador@store');
 
 
 
-Route::get('login' ,'UserControlador@index' );
+
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// rotas para admnistrador (login e requisicoes)
+Route::get('/admin-login' , 'Auth\AdminLoginController@index')->name('admin-login');
+Route::post('/admin-login' , 'Auth\AdminLoginController@login')->name('admin-login-submit');
+Route::get('/admin' , 'AdminControlador@index')->name('admin-home');
+
 
 
