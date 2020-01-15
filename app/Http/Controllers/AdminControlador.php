@@ -9,11 +9,11 @@ class AdminControlador extends Controller
     public function __construct()
     {
         // passagem do paramentro de qual guarda dentro de auth.php estará associado a este controlador.
-        $this->middleware('auth');    
+        $this->middleware('auth:admin');     
     }
 
     public function index()
     {
-        return view('admin');
+        return view('admin-home');
     }
 }

@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class AdminLoginController extends Controller
 {   
-  
+    protected $redirectTo = '/admin';
 
     public function __construct()
     {
@@ -20,8 +20,9 @@ class AdminLoginController extends Controller
 
     public function login(Request $request)
     {
+        // dd($request);
         $this->validate($request , [
-            $this->username() => 'required|string',
+            'email' => 'required|string',
             'password' => 'required|string',
         ]);
 
@@ -30,9 +31,8 @@ class AdminLoginController extends Controller
             'password' => $request->password,
         ];
 
-       $AuthOK =  Auth::guard('admin')->attempt($credentials , $request->remember());
+       $AuthOK =  Auth::guard('admin')->attempt($credentials , $request->remember);
        if($AuthOK){
-
             return redirect()->intended(route('admin-home'));
        }
     //    TODO: implementar resposta inteligente dependendo do retorno do model.

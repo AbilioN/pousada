@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\AuthenticationException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -48,4 +50,28 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+
+        protected function unauthenticated($request,AuthenticationException $exception)
+        {
+            if ($request->expectsJson()){
+                return response()->json(['message'=>$exception->getMessage()], 401);
+            }
+            // tratando o erro de autenticacao e redirencionando para a pagina de login correta
+            // Todo : atualizar o nome das rotas para os proximos users.
+            $guard = array_get($exception->guards() , 0);
+
+            switch($guard){
+                case 'admin':
+                    $login = "admin-login";
+                    break;
+                case 'web':
+                    $login = "login";
+                    break;
+                default:
+                    $login = "login"; 
+                    break;
+                }
+
+            return redirect()->guest(route($login));
+        }
 }
