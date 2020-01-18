@@ -14,6 +14,7 @@
 
 //Rotas da pagina de fotos
 
+
 use Illuminate\Routing\Console\MiddlewareMakeCommand;
 
 Route::get('/', function () {
@@ -52,14 +53,13 @@ Route::get('/servicos/guia' , function(){
 
 Route::get('/login2' , function(){
     return view('login2');
-});
+})->name('login2');
 
 Route::get('/registrar' , function(){
     return view('registrar');
 });
 
 
-Route::get('/login' ,'UserControlador@index' );
 
 
 // Rotas para contato
@@ -71,8 +71,10 @@ Route::get('/contato' , function(){
 Route::post('/contato', 'ContatoControlador@store');
 
 
+// Rotas para Usuario
 
-
+Route::get('/login' ,'UserControlador@index' );
+Route::get('/get-user-data' , 'UserControlador@getUserData')->name('get-user-data');
 
 
 Auth::routes();
@@ -86,3 +88,16 @@ Route::get('/admin' , 'AdminControlador@index')->name('admin-home');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+Route::post('/login__2' , 'ContatoControlador@teste')->name('login__2');

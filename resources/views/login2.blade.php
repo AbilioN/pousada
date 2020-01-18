@@ -3,7 +3,15 @@
 @section('body')
     <h1>login cadastro</h1>
 
-    <form action="{{ route('login') }}" method="POST">
+    <style>
+      .alert {
+        font-size: 20px;
+      }
+    </style>
+
+    @include('flash::message')
+
+    <form action="{{ route('login__2') }}" method="POST">
     @csrf
   <div class="form-group">
     <label for="exampleInputEmail1">Endereço de email</label>
@@ -19,6 +27,7 @@
     <label class="form-check-label" for="exampleCheck1">Clique em mim</label>
   </div>
   <button type="submit" class="btn btn-primary">Enviar</button>
+  <!-- Todo: duas paginas diferentes, uma pra login, outra pra registro -->
   <a href="/registrar" class="btn btn-primary">Registrar</a>
 </form>
 

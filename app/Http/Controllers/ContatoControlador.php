@@ -5,6 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contato;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+use Illuminate\Support\Facades\Auth;
+
 class ContatoControlador extends Controller
 {
     /**
@@ -89,5 +104,48 @@ class ContatoControlador extends Controller
     public function destroy($id)
     {
     
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function teste(Request $request)
+    {
+
+        $credentials = ['email' => $request->input('email'), 'password' => $request->input('password')];
+        // dd($credentials);
+
+        if (Auth::guard('web')->attempt($credentials)) {
+            $user = Auth::user();
+            return view('home2', compact('user'));
+
+            return view('home2',  compact('user'));
+        }
+
+        
+        
+
+        flash('Login ou senha incorretos.')->error();
+        // return redirect($request->route());
+
+        return redirect(route('login2'));
+
     }
 }

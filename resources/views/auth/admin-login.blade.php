@@ -1,7 +1,7 @@
 <meta name="csrf-token" content="{{csrf_token()}}">
 @extends('layout.app')
 @section('body')
-    <h1>login cadastro</h1>
+    <h1>Admin Login</h1>
 
     <form action="{{ route('admin-login-submit') }}" method="POST">
     @csrf
