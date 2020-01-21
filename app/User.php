@@ -49,13 +49,3 @@ class User extends Authenticatable
 
 }
 
-
-
-/*
-
-
-$user = new User(1);
-$user->getData();
-
-
-SELECT * FROM user WHERE id = ?

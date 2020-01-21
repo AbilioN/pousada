@@ -7,17 +7,7 @@
 
 @section('body')
     <h1>Home Usuario</h1>
-    <h2>Bem vindo, {{ $user->perfil->nome }}!</h2>
+    <p>One piece é sensacional 2!</p>
+    <p>Bem vindo {{$user->name}} !</p>
 
-    <!-- <form action="{{route('get-user-data')}}" method="GET">
-        
-        <button>Meus Dados</button>
-    </form>
-
-    <form id="logout-form" action="{{ route('logout')}}" method="POST">
-    @csrf
-    <button type="submit">Sair</button>
-    </form> -->
-    
-   
 @endsection

@@ -50,6 +50,7 @@ class ContatoControlador extends Controller
      */
     public function store(Request $request)
     {
+           
         $contato = new Contato();
         $contato->assunto = $request['contatoAssunto'];
         $contato->nome = $request['contatoNome'];

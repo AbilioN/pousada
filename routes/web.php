@@ -44,21 +44,23 @@ Route::get('/servicos/massagem-e-estetica' , function(){
     
 });
 Route::get('/servicos/guia' , function(){
-    return view('guia');
+    return view('guia')->name('guia');
     
 });
 
+
+Auth::routes();
 
 //Rotas para logins
 
 Route::get('/login2' , function(){
     return view('login2');
 })->name('login2');
-
+Route::post('/login2' , 'Auth\LoginController@login2')->name('login2');
 Route::get('/registrar' , function(){
     return view('registrar');
 });
-
+Route::post('/registrar' , 'Auth\LoginController@registrar' )->name('registrar');
 
 
 
@@ -77,9 +79,9 @@ Route::get('/login' ,'UserControlador@index' );
 Route::get('/get-user-data' , 'UserControlador@getUserData')->name('get-user-data');
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // rotas para admnistrador (login e requisicoes)
 Route::get('/admin-login' , 'Auth\AdminLoginController@index')->name('admin-login');

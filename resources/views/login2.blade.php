@@ -11,7 +11,7 @@
 
     @include('flash::message')
 
-    <form action="{{ route('login__2') }}" method="POST">
+  <form action="/login2" method="POST">
     @csrf
   <div class="form-group">
     <label for="exampleInputEmail1">Endereço de email</label>
