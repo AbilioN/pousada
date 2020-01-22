@@ -33,7 +33,7 @@ Route::get('/fotos/eventos', function(){
 });
 
 
-//Rotas para servicos
+// Rotas para servicos
 
 Route::get('/servicos/culinaria' , function(){
     return view('culinaria');
@@ -47,6 +47,7 @@ Route::get('/servicos/guia' , function(){
     return view('guia')->name('guia');
     
 });
+
 
 
 Auth::routes();
@@ -78,6 +79,7 @@ Route::post('/contato', 'ContatoControlador@store');
 Route::get('/login' ,'UserControlador@index' );
 Route::get('/get-user-data' , 'UserControlador@getUserData')->name('get-user-data');
 
+Route::post('newService' , 'ServiceController@newService')->name('newService');
 
 
 
