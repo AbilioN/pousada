@@ -79,7 +79,12 @@ Route::post('/contato', 'ContatoControlador@store');
 Route::get('/login' ,'UserControlador@index' );
 Route::get('/get-user-data' , 'UserControlador@getUserData')->name('get-user-data');
 
-Route::post('newService' , 'ServiceController@newService')->name('newService');
+// todo: newService ainda será refatorado tanto aqui quanto no front end
+
+Route::post('getServices' , 'ServiceController@getAll')->name('getServices');
+Route::post('teste' , function(){
+    return 'json';
+});
 
 
 

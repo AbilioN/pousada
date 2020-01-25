@@ -18,7 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('contato' , function(){
+Route::get('contato' , function(){
 
     return response('as aulas do papi');
 });
+
+
+// Rotas de dados da aplicação
+
+Route::get('/getServicesJson' ,'ServiceController@getAllJson')->name('getServicesJson');

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Service;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -39,10 +40,10 @@ class LoginController extends Controller
     {
         // $this->middleware('guest')->except('logout');
     }
-        
+
     public function login2(Request $request)
-    {   
-        $this->validate($request , [
+    {
+        $this->validate($request, [
             'email' => 'required|string',
             'password' => 'required|string',
         ]);
@@ -51,14 +52,18 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
-       $AuthOK = Auth::guard('web')->attempt($credentials);
-    //    dd($AuthOK);
-       if($AuthOK){
-           $user = Auth::user();
-            return view(('home2'), compact('user'));
-       }else{
-           dd('senha errada');
-       }
+        $AuthOK = Auth::guard('web')->attempt($credentials);
+        //    dd($AuthOK);
+        if ($AuthOK) {
+            $user = Auth::user();
+            $services = Service::with('subServices')->get();
+
+//               return response()->json($services->groupBy('id'));
+
+            return view(('home2'), compact('user', 'services'));
+        } else {
+            dd('senha errada');
+        }
     }
     public function registrar(Request $request)
     {
