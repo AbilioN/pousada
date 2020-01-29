@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-use App\Service;
+use App\Setor;
+use App\Categoria;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -56,11 +58,14 @@ class LoginController extends Controller
         //    dd($AuthOK);
         if ($AuthOK) {
             $user = Auth::user();
-            $services = Service::with('subServices')->get();
+            $setores = Setor::with('categorias')->get();
 
-//               return response()->json($services->groupBy('id'));
+            $categorias  = Categoria::with('produtos')->get();
+            // return response()->json($setores->groupBy('id'));
 
-            return view(('home2'), compact('user', 'services'));
+              return response()->json($categorias->groupBy('id'));
+
+            return view(('home2'), compact('user', 'setores' , 'categorias'));
         } else {
             dd('senha errada');
         }

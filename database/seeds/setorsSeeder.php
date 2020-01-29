@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ServicesSeed extends Seeder
+class setorsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,26 +11,25 @@ class ServicesSeed extends Seeder
      */
     public function run()
     {
-        DB::table('services')->insert([
+        DB::table('setors')->insert([
             [
-                'serviceSector'=> 'Atendente de Hospedagem',
+                'setor'=> 'Servicos',
              
                 
             ],
             [
-                'serviceSector'=> 'Pousada Driver',
+                'setor'=> 'Alugueis',
              
             ],
             [
-                'serviceSector'=> 'Guia Turistico',
+                'setor'=> 'Cozinha',
              
             ],
             [
-                'serviceSector'=> 'Bem estar',
+                'setor'=> 'Eventos',
              
             ]
-        ]);
 
-       
+        ]);
     }
 }
