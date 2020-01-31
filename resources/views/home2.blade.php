@@ -87,17 +87,16 @@
             <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Selecione o serviço</label>
-            <select class="form-control" id="serviceType" name="serviceType">
-                @foreach($services as $service)
-                <option value="{{ $service->id }}">{{$service->serviceSector}}</option>
-                @endforeach
+            <label for="exampleFormControlSelect1">Selecione a modalidade</label>
+            <select class="form-control" id="ServicoCategoria" name="ServicoCategoria">
+               <option>Selecione</option>
             </select>
         </div>
         <div class="form-group row">
-            <label for="registerSexInput" class="">Modalidade</label>
+            <label for="registerSexInput" class="">Serviço</label>
             <div class="col-md-12">
-                <select class="custom-select" id="serviceSubType" name="serviceSubType">
+                <select class="custom-select" id="servico" name="servico">
+                    <option>Selecione</option>
                 </select>
             </div>
 
@@ -121,17 +120,17 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Selecione a categoria de aluguel</label>
-            <select class="form-control" id="rent" name="rent">
-                @foreach($rents as $rent)
-                <option value="{{ $rent->id }}">{{$rent->rentSector}}</option>
-                @endforeach
+            <select class="form-control" id="AluguelCategoria" name="AluguelCategoria">
+               <option>Selecione</option>
             </select>
         </div>
         <div class="form-group row">
             <label for="registerSexInput" class="">Modalidade</label>
             <div class="col-md-12">
-                <select class="custom-select" id="rentType" name="rentType">
+                <select class="custom-select" id="Aluguel" name="Aluguel">
+                    <option>Selecione</option>
                 </select>
+                <div id="AluguelDesc" class="width:100%"></div>
             </div>
 
         </div>
@@ -167,100 +166,93 @@
 <script>
     $(function() {
 
-        const services = JSON.parse('{!! $services !!}');
-        const rents = JSON.parse('{!! $rents !!}');
+        const produtos = JSON.parse('{!! $produtos !!}');
+        const categorias = JSON.parse('{!! $categorias !!}');
+    
+        
 
-        console.log(services);
-        console.log(rents);
+        console.log(produtos);
+        console.log(categorias);
+        const servicos  = categorias[0]; //seelecionar apenas as categorias referentes a atendimento
+        const alugueis = categorias[1];
+        // console.log(alugueis.categorias);
+        // console.log(alugueis);
+        // console.log(servicos);
+        for(let servico of servicos.categorias){
 
-        $('#serviceType').on('change', (event) => {
-            // console.log('teste');
-            // console.log(event.target.value);
-            console.log(services);
-            const subServices = services[event.target.value - 1].sub_services;
+            const option = document.createElement('option');
+            option.innerText = servico.categoria;
+            option.id = servico.id;
+        
+            $('#ServicoCategoria').append(option);
+        }
+        for(let aluguel of alugueis.categorias){
+ 
+            const option = document.createElement('option');
+            option.innerText = aluguel.categoria;
+            option.id = servico.id;
+            
+            // console.log(option);
+            $('#AluguelCategoria').append(option);
+        }
+        $('#ServicoCategoria').on('change', (event) => {
+            let chave = event.currentTarget.selectedIndex -1;
+            // -1 para adequar a identação de array entre o objeto php e o objeto javascript  
+            $('#servico').html('');
 
-            $('#serviceSubType').html(''); //equivalente a serviceSubType.innerHTML = ''
-
-            // subServices.forEach(subService => {
-            //     // callback que vai rodar para cada elemento, equivalente ao for...let...of... abaixo
-
-            //     const serviceType = subService.serviceType;
-
-            //     const option = document.createElement('option');
-            //     option.innerText = serviceType;
-            //     option.id = subService.id
-
-            //     $('#serviceSubType').append(option);
-
-            // });
-
-            for (let subService of subServices) {
-                // codigo que vai rodar para cada elemento, equivalente ao array.forEach(element => {}) acima
-
-                const serviceType = subService.serviceType;
-                // console.log(serviceType);
-
-                let option = document.createElement('option');
-                option.innerText = serviceType;
-                option.id = subService.id
-
-                $('#serviceSubType').append(option);
+            for(let produto of produtos[chave].produtos)
+            {   
+                const option  = document.createElement('option');
+                option.innerText = produto.nome;
+                option.id = produto.id;
+                $('#servico').append(option);
             }
+
 
         });
 
-        $('#rent').on('change' , (event) =>{
-            // console.log('rent');
-            console.log(rents);
-            // console.log(event.target.value);
-             const rentTypes = rents[event.target.value - 1].rents_types;
-            //  console.log(rentTypes);
-             $('#rentType').html('');
-
-             for (let rentType of rentTypes) {
-                // codigo que vai rodar para cada elemento, equivalente ao array.forEach(element => {}) acima
-
-                const rentTypes = rentType.rentType;
-                // console.log(rentTypes)
-                let option = document.createElement('option');
-                option.innerText = rentTypes;
-                option.id = rents.id;
-
-                $('#rentType').append(option);
+        $('#AluguelCategoria').on('change' , (event) => {
+            let chave = event.currentTarget.selectedIndex + 3;
+            // -3 também para adaptar a posicao do Array.
+            $('#Aluguel').html('');
+            $('#AluguelDesc').html('');
+            op = document.createElement('option');
+            op.innerText = 'Selecione';
+            $('#Aluguel').append(op);
+            for(let produto of produtos[chave].produtos){
+                const option = document.createElement('option');
+                option.innerText = produto.nome;
+                option.id = produto.id;
+                $('#Aluguel').append(option); 
             }
-
         });
+
+        $('#Aluguel').on('change' , (event) => {
+                let chaveProduto = event.currentTarget.selectedIndex -1;
+                let chave = document.getElementById('AluguelCategoria').selectedIndex;
+                chave = chave + 3;
+                console.log(chave);
+                let Produto = produtos[chave].produtos[chaveProduto];
+                console.log(Produto);
+                let descricao = document.createElement('textarea'); 
+                descricao.innerText = Produto.descricao;
+                console.log(descricao);
+                document.getElementById('AluguelDesc').appendChild(descricao);
+                
+        });
+    
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
 
         });
-
-
         function service() {
             console.log('serivcess');
         }
-
-
-
-        function getServices() {
-            $.ajax({
-                type: "GET",
-                url: "{{ route('getServicesJson')}}",
-                success: function(response) {
-                    // alert('cheguei');
-                    console.log(response);
-                },
-            });
-        }
-
         $('#serviceForm').hide();
         $('#saldo').hide();
         $('.section').hide();
-        
-
-
         $('#saldo-parcial-button').on('click', (event) => {
             console.log(event)
         });
