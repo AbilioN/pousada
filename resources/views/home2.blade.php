@@ -68,7 +68,7 @@
 
 <div>
 
-    <button type="button" id="newServiceForm" class="btn btn-primary">Solicitar Atendimento</button>
+    <button type="button" id="novoServicoForm" class="btn btn-primary">Solicitar Atendimento</button>
     <button type="button"  id="newRentForm" class="btn btn-secondary">Alugueis</button>
     <button type="button" id="currentValue" class="btn btn-success">Cozinha</button>
     <button type="button" class="btn btn-danger">Danger</button>
@@ -80,7 +80,7 @@
 
 <div id="section">
 
-    <form action="" method="POST" name="token" id="serviceForm" class="section">
+    <form action="" method="POST" name="token" id="servicoForm" class="section">
         @csrf
         <div class="form-group">
             <label for="exampleFormControlInput1">Email address</label>
@@ -98,6 +98,7 @@
                 <select class="custom-select" id="servico" name="servico">
                     <option>Selecione</option>
                 </select>
+                <div id="servicoDesc"></div>
             </div>
 
         </div>
@@ -168,9 +169,6 @@
 
         const produtos = JSON.parse('{!! $produtos !!}');
         const categorias = JSON.parse('{!! $categorias !!}');
-    
-        
-
         console.log(produtos);
         console.log(categorias);
         const servicos  = categorias[0]; //seelecionar apenas as categorias referentes a atendimento
@@ -180,7 +178,7 @@
         // console.log(servicos);
         for(let servico of servicos.categorias){
 
-            const option = document.createElement('option');
+            const option = document.createElement   ('option');
             option.innerText = servico.categoria;
             option.id = servico.id;
         
@@ -196,10 +194,14 @@
             $('#AluguelCategoria').append(option);
         }
         $('#ServicoCategoria').on('change', (event) => {
+            $('#servicoDesc').html('');
+
             let chave = event.currentTarget.selectedIndex -1;
             // -1 para adequar a identação de array entre o objeto php e o objeto javascript  
             $('#servico').html('');
-
+            op = document.createElement('option');
+            op.innerText = 'Selecione';
+            $('#servico').append(op);
             for(let produto of produtos[chave].produtos)
             {   
                 const option  = document.createElement('option');
@@ -207,11 +209,10 @@
                 option.id = produto.id;
                 $('#servico').append(option);
             }
-
-
         });
 
         $('#AluguelCategoria').on('change' , (event) => {
+            $('#AluguelDesc').html('');
             let chave = event.currentTarget.selectedIndex + 3;
             // -3 também para adaptar a posicao do Array.
             $('#Aluguel').html('');
@@ -228,6 +229,8 @@
         });
 
         $('#Aluguel').on('change' , (event) => {
+                $('#AluguelDesc').html('');
+
                 let chaveProduto = event.currentTarget.selectedIndex -1;
                 let chave = document.getElementById('AluguelCategoria').selectedIndex;
                 chave = chave + 3;
@@ -238,8 +241,22 @@
                 descricao.innerText = Produto.descricao;
                 console.log(descricao);
                 document.getElementById('AluguelDesc').appendChild(descricao);
+                // document.getElementById('#')
                 
         });
+        $('#servico').on('change' , (event) => {
+                $('#servicoDesc').html('');
+                let chaveProduto = event.currentTarget.selectedIndex -1;
+                let chave = document.getElementById('AluguelCategoria').selectedIndex;
+                chave = chave + 1;
+                // console.log(chave);
+                let Produto = produtos[chave].produtos[chaveProduto];
+                // console.log(Produto);
+                let descricao = document.createElement('textarea'); 
+                descricao.innerText = Produto.descricao;
+                // console.log(descricao);
+                document.getElementById('servicoDesc').appendChild(descricao);
+        }); 
     
         $.ajaxSetup({
             headers: {
@@ -250,17 +267,17 @@
         function service() {
             console.log('serivcess');
         }
-        $('#serviceForm').hide();
+        $('#servicoForm').hide();
         $('#saldo').hide();
         $('.section').hide();
         $('#saldo-parcial-button').on('click', (event) => {
             console.log(event)
         });
-        $('#newServiceForm').on('click' , (event) =>{
+        $('#novoServicoForm').on('click' , (event) =>{
             var section = event.target.id;
             console.log(section);
             $('.section').hide();
-            $(`#serviceForm`).toggle();
+            $(`#servicoForm`).toggle();
         });
         $('#newRentForm').on('click' , (event) =>{
             $('.section').hide();
