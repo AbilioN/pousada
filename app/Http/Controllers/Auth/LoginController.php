@@ -58,14 +58,12 @@ class LoginController extends Controller
         //    dd($AuthOK);
         if ($AuthOK) {
             $user = Auth::user();
-            $categorias = Setor::with('categorias')->get();
-
-            $produtos  = Categoria::with('produtos')->get();
-            // return response()->json($categorias->groupBy('id'));
-
+            $categorias = Setor::with('categorias.produtos')->get();
+            // $produtos  = Categoria::with('produtos')->get();
+            // return response()->json($categorias);
             //   return response()->json($produtos->groupBy('id'));
 
-            return view(('home2'), compact('user', 'produtos' , 'categorias'));
+            return view('index', compact('user', 'produtos' , 'categorias'));
         } else {
             dd('senha errada');
         }

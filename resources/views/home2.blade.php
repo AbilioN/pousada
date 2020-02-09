@@ -36,7 +36,7 @@
         }
     }
 
-
+    
     /* tracker.style.backgroundColor = 'red';
     tracker.style.width = '10px';
     tracker.style.height = '10px';
@@ -252,7 +252,7 @@
                 // console.log(chave);
                 let Produto = produtos[chave].produtos[chaveProduto];
                 // console.log(Produto);
-                let descricao = document.createElement('textarea'); 
+                let descricao = document.createElement('div'); 
                 descricao.innerText = Produto.descricao;
                 // console.log(descricao);
                 document.getElementById('servicoDesc').appendChild(descricao);
@@ -275,6 +275,7 @@
         });
         $('#novoServicoForm').on('click' , (event) =>{
             var section = event.target.id;
+            
             console.log(section);
             $('.section').hide();
             $(`#servicoForm`).toggle();

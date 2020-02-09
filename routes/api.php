@@ -1,5 +1,6 @@
 <?php
 
+use App\Produto;
 use Illuminate\Http\Request;
 
 /*
@@ -27,3 +28,7 @@ Route::get('contato' , function(){
 // Rotas de dados da aplicação
 
 Route::get('/getServicesJson' ,'ServiceController@getAllJson')->name('getServicesJson');
+
+Route::get('/teste' , function(){
+    return view('teste');
+})->name('teste');

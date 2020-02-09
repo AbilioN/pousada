@@ -101,7 +101,7 @@ Route::get('/admin' , 'AdminControlador@index')->name('admin-home');
 
 
 
-
+Route::get('/teste-view-com-side-bar', function() { return view('index'); });
 
 
 

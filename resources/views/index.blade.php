@@ -25,7 +25,7 @@
     }
 </style>
 
-@extends('layout.app')
+@extends('layout.app2')
 @section('body')
     <h1>index</h1>
     <div class="container anuncio">
