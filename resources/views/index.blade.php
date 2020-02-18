@@ -1,82 +1,99 @@
 <style>
+  *{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  }
+  .index-main{
+    border: 2px solid red;
+    height: auto;
+    top: 100px;
+    padding: 100px;
 
-    h3{
-        color: black;
-    }
-    p {
-        color: black;
-    }
-    .container.anuncio{
-        max-height: 150px;
-        position: relative;
-    }
-    img{
-        position: relative;
-    }
-    .foto{
-        height: 100%;
-    }
-    .anuncio{
-        height: 450px;
-    }
-    .conteiner{
-        height: 450px;
-        position: absolute;
-    }
+  }
+  .carousel-container{
+    width: 60%;
+    margin: auto;
+    /* overflow: hidden; */
+    border: 5px solid black;
+  }
+  .carousel-slide{
+    display: flex;
+    width: 100%;
+    height:  500px;
+  }
 </style>
+<script>
+  // console.log('gisele');
+  
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-@extends('layout.app2')
+
+@extends('layout.app')
 @section('body')
-    <h1>index</h1>
-    <div class="container anuncio">
-            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                    </ol>
-                    <div class="carousel-inner conteiner">
-                      <div class="carousel-item active anuncio">
-                        <img class="d-block w-100 foto" src="{{asset('img/pousadamain.jpg')}}" alt="Primeiro Slide">
-                        <div class="carousel-caption d-none d-md-block">
-                                <h3>Titulo2</h3>
-                                <p>texto2</p>
-                              </div>
-                      </div>
-                      <div class="carousel-item">
-                        <img class="d-block w-100 foto" src="{{asset('img/pousadamain2.jpg')}}" alt="Segundo Slide">
-                        <div class="carousel-caption d-none d-md-block">
-                                <h3>Titulo1</h3>
-                                <p>texto1</p>
-                              </div>
-                      </div>
-                      <div class="carousel-item">
-                        <img class="d-block w-100 foto" src="{{asset('img/pedalada1.jpg')}}" alt="Terceiro Slide">
-                        <div class="carousel-caption d-none d-md-block">
-                                <h3>Titulo3</h3>
-                                <p>texto3</p>
-                              </div>
-                      </div>
-                      <div class="carousel-item">
-                            <img class="d-block w-100 foto" src="{{asset('img/praiadepipa3.jpg')}}" alt="Quarto Slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                    <h3>Titulo3</h3>
-                                    <p>texto3</p>
-                                  </div>
-                          </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Anterior</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Próximo</span>
-                    </a>
-                  </div>
-
+   
+<body class="index-body">
+  <div class="index-main">
+    <div class="carousel-container">
+          <div class="carousel-slide">
+            <img src="{{asset('img/pedalada4.jpg')}}" id="lastClone" alt="">
+            <img src="{{asset('img/pousadamain.jpg')}}" alt="">
+            <img src="{{asset('img/pousadamain2.jpg')}}" alt="">
+            <img src="{{asset('img/pedalada3.jpg')}}" alt="">
+            <img src="{{asset('img/pedalada4.jpg')}}" alt="">
+            <img src="{{asset('img/pousadamain.jpg')}}" id="firstClone" alt="">
+          </div>
     </div>
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+    <h1>uauhsausa</h1>
 
-</div>
+
+  </div>
+</body>
+
 @endsection
+
+<script>
+
+  $(function(){
+    console.log('fabiorabin');
+    const carouselSlide = document.querySelector('.carousel-slide');
+    const carouselImages = document.querySelectorAll('.carousel-slide img');
+
+    const prevBtn  = document.getElementById('prev');
+    const nextBtn  = document.getElementById('next');
+
+    let counter = 1;
+    console.log(carouselImages);
+    const size = carouselImages[0].clientWidth;
+
+    console.log(size);
+
+    nextBtn.addEventListener('click', ()=>{
+        console.log('click Next');
+        carouselSlide.style.transition = "transform 0.4 ease-in-out"; 
+        // console.log(counter);
+        counter++;  
+        carouselSlide.style.transform = 'translateX('+(-size * counter)+'px)';
+
+        console.log(counter);
+
+    });
+    prevBtn.addEventListener('click' , ()=>{
+      console.log('click prev');
+      carouselSlide.style.transition = "transform 0.4 ease-in-out"; 
+      counter--;
+      console.log(counter);
+
+      
+    });
+
+
+  });
+
+  
+
+  // console.log(counter);
+</script>

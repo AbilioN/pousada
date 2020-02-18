@@ -3,18 +3,6 @@
 @section('body')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<h1>Home Usuario</h1>
-<p>One piece é sensacional 2!</p>
-<p>Bem vindo {{$user->name}} !</p>
-
-
-
-
-
-
-
-
-
 <style>
     @keyframes pulse {
         0% {
