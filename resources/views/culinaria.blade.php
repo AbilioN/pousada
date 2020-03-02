@@ -1,4 +1,4 @@
 @extends('layout.app')
 @section('body')
-    <h1>culinaria</h1>
+    <h1>culinaria 2</h1>
 @endsection
