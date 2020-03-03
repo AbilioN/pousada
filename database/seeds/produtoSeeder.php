@@ -15,7 +15,7 @@ class produtoSeeder extends Seeder
             [
                 'categoria_id' => 1,
                 'nome' => 'Check-in de hospedagem',
-                'descricao' => 'Dê seu check-in e acomchegue-se nas nossas instalações, temos os melhores serviços da região.',
+                'descricao' => 'Dê seu check-in e acomchegue-se nas nossas instalações, temos os melhores serviços da rregião.',
                 'preco' => 0,
             ],
             [
