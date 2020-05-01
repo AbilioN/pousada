@@ -57,7 +57,9 @@ Auth::routes();
 Route::get('/login2' , function(){
     return view('login2');
 })->name('login2');
+
 Route::post('/login2' , 'Auth\LoginController@login2')->name('login2');
+
 Route::get('/registrar' , function(){
     return view('registrar');
 });
@@ -96,6 +98,8 @@ Route::post('/admin-login' , 'Auth\AdminLoginController@login')->name('admin-log
 Route::get('/admin' , 'AdminControlador@index')->name('admin-home');
 
 
+
+Route::post('/nova-os' , 'OrdemServicoController@newOS');
 
 
 

@@ -13,12 +13,11 @@
         </style>
 </head>
 
-
-
 @extends('layout.app')
 @section('body')
     <h1>Contato</h1>
 
+    <div class="container">
     <form action="/contato" method="POST">
     @csrf
             <div class="form-group espaco">
@@ -71,10 +70,10 @@
             </div>
             <div class="form-group espaco">
               <label for="contatoMensagemInput">Mensagem</label>
-              <textarea class="form-control" id="contatoMensagem" name="contatoMensagem" rows="3"></textarea>
+              <textarea class="form-control" id="contatoMensagem" name="contatoMensagem" rows="13"></textarea>
             </div>
             <button type="submit" class="btn btn-primary alinhamento" >Enviar</button>
           </form>
-
-          
+    </div>
+   
 @endsection

@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(setorsSeeder::class);
         $this->call(categoriaSeeder::class);
         $this->call(produtoSeeder::class);
-  
+        $this->call(quartoSeeder::class);
     }
 }

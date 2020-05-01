@@ -21,13 +21,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/491216a0c1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
     <title>Document</title>
     <style>
 
@@ -44,7 +44,6 @@
         }
 
         .main {
-            background: linear-gradient(to bottom,#A0EB81, #3EB4EB ,#FFF14A, white  );
 
             height: 100%;
         }
@@ -180,9 +179,12 @@
 
         /* fim da sidebar */
 
+        body {
+            background: linear-gradient(to bottom,#FFF14A , #3EB4EB , #A0EB81 );
+        }
         .top-bar {
             display: flex;
-            height: 100px;
+            height: 147px;
             width: 100%;
             color: black;
             
@@ -190,13 +192,11 @@
             position: relative;
             align-content: center;
             justify-content: center;
-            background: linear-gradient(to bottom,#FFF14A , #3EB4EB , #A0EB81 );
             /* todo  : mover para cima quando acabar a implementação */
         }
         .logo{
-            display: inline-flex;
-            
-            flex-direction: column;
+            display: flex;
+            flex-direction: row;
             /* border: 2px solid aqua; */
             /* height: 60px; */
             /* position: absolute; */
@@ -211,7 +211,6 @@
         .logo img{
             display: block;
             /* border: 2px solid green; */
-            position: absolute;
             height: 100%;
             /* right: 0; */
             align-self: center;
@@ -243,6 +242,8 @@
 </head>
 
 <body style="position: relative">
+    <div class="container">
+
         <div class="top-bar">
             <div class="logo">
                 <img class="primeira" src="{{asset('img/coqueiro.png')}}" alt="">
@@ -252,85 +253,86 @@
                 <img class="segunda" src="{{asset('img/coqueiro.png')}}" alt="">
             </div>
         </div>
-
-    <div class="main">
-        @yield('body')
-    </div>
-    <div class="click-catcher"></div>
-    <div class="sidebar">
-
-        <nav>
-            <ul>
-                <li>
-                    <a href="/">Home<i class="fas"></i></a>
-                </li>
-                <li>
-                    <a href="#">Fotos<i class="fas fa-chevron-circle-down"></i></a>
-                    <ul>
-                        <li><a href="/fotos/apousada">A pousada</a></li>
-                        <li><a href="/fotos/turismo">Turismo</a></li>
-                        <li><a href="/fotos/eventos">Eventos</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Serviços<i class="fas fa-chevron-circle-down"></i></a>
-                    <ul>
-                        <li><a href="/servicos/culinaria">Guia Turístico</a></li>
-                        <li><a href="#">Alugueis</a></li>
-                        <li><a href="/servicos/massagem-e-estetica">Massagem e Estética</a></li>
-                        <li><a href="/servicos/culinaria">Culinária</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/login2" class="" >Login/Cadastre-se</a>
-                </li>
-                <li>
-                    <a href="/contato" class="" >Contato</a>
-                </li>
-
-
-
-                @if(isset($user))
-
-                <!-- <li>
-                    <a href="#">Bem vindo, {{ $user->name }}<i class="fas fa-chevron-circle-down"></i></a>
-                    <ul>
-                        <li><a href="#">Subitem 1</a></li>
-                        <li><a href="#">Subitem 2</a></li>
-                        <li><a href="#">Subitem 3</a></li>
-                        <li><a href="#">Subitem 4</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="#">Item 3<i class="fas fa-chevron-circle-down"></i></a>
-                    <ul>
-                        <li><a href="#">Subitem 1</a></li>
-                        <li><a href="#">Subitem 2</a></li>
-                        <li><a href="#">Subitem 3</a></li>
-                        <li><a href="#">Subitem 4</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="#">Item 3<i class="fas fa-chevron-circle-down"></i></a>
-                    <ul>
-                        <li><a href="#">Subitem 1</a></li>
-                        <li><a href="#">Subitem 2</a></li>
-                        <li><a href="#">Subitem 3</a></li>
-                        <li><a href="#">Subitem 4</a></li>
-                    </ul>
-                </li> -->
-                @endif
-
-
-
-
-
-            </ul>
-        </nav>
-        <div class="button-container">
-            <button onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    
+        <div class="main">
+            @yield('body')
+        </div>
+        <div class="click-catcher"></div>
+        <div class="sidebar">
+    
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/">Home<i class="fas"></i></a>
+                    </li>
+                    <li>
+                        <a href="#">Fotos<i class="fas fa-chevron-circle-down"></i></a>
+                        <ul>
+                            <li><a href="/fotos/apousada">A pousada</a></li>
+                            <li><a href="/fotos/turismo">Turismo</a></li>
+                            <li><a href="/fotos/eventos">Eventos</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Serviços<i class="fas fa-chevron-circle-down"></i></a>
+                        <ul>
+                            <li><a href="/servicos/culinaria">Guia Turístico</a></li>
+                            <li><a href="#">Alugueis</a></li>
+                            <li><a href="/servicos/massagem-e-estetica">Massagem e Estética</a></li>
+                            <li><a href="/servicos/culinaria">Culinária</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/login2" class="" >Login/Cadastre-se</a>
+                    </li>
+                    <li>
+                        <a href="/contato" class="" >Contato</a>
+                    </li>
+    
+    
+    
+                    @if(isset($user))
+    
+                    <!-- <li>
+                        <a href="#">Bem vindo, {{ $user->name }}<i class="fas fa-chevron-circle-down"></i></a>
+                        <ul>
+                            <li><a href="#">Subitem 1</a></li>
+                            <li><a href="#">Subitem 2</a></li>
+                            <li><a href="#">Subitem 3</a></li>
+                            <li><a href="#">Subitem 4</a></li>
+                        </ul>
+                    </li>
+    
+                    <li>
+                        <a href="#">Item 3<i class="fas fa-chevron-circle-down"></i></a>
+                        <ul>
+                            <li><a href="#">Subitem 1</a></li>
+                            <li><a href="#">Subitem 2</a></li>
+                            <li><a href="#">Subitem 3</a></li>
+                            <li><a href="#">Subitem 4</a></li>
+                        </ul>
+                    </li>
+    
+                    <li>
+                        <a href="#">Item 3<i class="fas fa-chevron-circle-down"></i></a>
+                        <ul>
+                            <li><a href="#">Subitem 1</a></li>
+                            <li><a href="#">Subitem 2</a></li>
+                            <li><a href="#">Subitem 3</a></li>
+                            <li><a href="#">Subitem 4</a></li>
+                        </ul>
+                    </li> -->
+                    @endif
+    
+    
+    
+    
+    
+                </ul>
+            </nav>
+            <div class="button-container">
+                <button onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            </div>
         </div>
     </div>
 

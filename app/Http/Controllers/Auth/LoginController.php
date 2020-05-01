@@ -52,20 +52,19 @@ class LoginController extends Controller
 
         $credentials = [
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => $request->password
         ];
+
         $AuthOK = Auth::guard('web')->attempt($credentials);
-        //    dd($AuthOK);
         if ($AuthOK) {
             $user = Auth::user();
             $categorias = Setor::with('categorias.produtos')->get();
+            // dd($categorias[0]->set);
             // $produtos  = Categoria::with('produtos')->get();
-            // return response()->json($categorias);
-            //   return response()->json($produtos->groupBy('id'));
-
-            return view('index', compact('user', 'produtos' , 'categorias'));
+            return view('home2', compact('user', 'categorias'));
         } else {
-            dd('senha errada');
+            flash('Erro: usuário e senha inválidos');
+            return redirect()->back();
         }
     }
     public function registrar(Request $request)
